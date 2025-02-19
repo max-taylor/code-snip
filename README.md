@@ -1,9 +1,36 @@
 # Code Snip
 
-This crate simplifies the process of creating code snippets, simply pass 2 arguments:
-- input; The code you want a snippet for
-- output; The output file name
+`code-snip` is a Rust binary that simplifies the process of generating code snippets. It allows you to quickly create and save code snippets by specifying the input code and the desired output file name.
 
-## Environment variables
+## Installation
 
-You can configure the export path via the "SYNTAX_EXPORT_PATH" environment variable, then all code snippets will be exported to `{SYNTAX_EXPORT_PATH}/{output}`
+Install `code-snip` via Cargo:
+
+```sh
+cargo install code-snip
+```
+
+## Usage
+
+```sh
+code-snip --input "fn main() { println!(\"Hello, world!\"); }" --output snippet.rs
+```
+
+## Arguments
+
+- `input`: The code you want to create a snippet for.
+- `output`: The filename for the generated snippet.
+
+## Environment Variables
+
+You can configure the export path via the `SYNTAX_EXPORT_PATH` environment variable. If set, all generated snippets will be saved in this directory:
+
+```sh
+export SYNTAX_EXPORT_PATH="/path/to/snippets"
+```
+
+All code snippets will then be exported to `{SYNTAX_EXPORT_PATH}/{output}`.
+
+## License
+
+This project is licensed under the MIT License.
