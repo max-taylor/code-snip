@@ -6,7 +6,7 @@ authors = ["Max Taylor"]
 description = "A CLI tool to create images from code snippets."
 license = "MIT"
 repository = "https://github.com/max-taylor/code-snip"
-keywords = ["cli", "tool", "rust", "code snippet"]
+keywords = ["cli", "tool", "rust", "snippet"]
 categories = ["command-line-utilities"]
 
 [dependencies]
