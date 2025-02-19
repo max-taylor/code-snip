@@ -1,4 +1,5 @@
 use clap::Parser;
+use colors::boost_saturation;
 use image::{ImageBuffer, Rgba};
 use rusttype::{point, Font, Scale};
 use std::io::{self};
@@ -6,6 +7,8 @@ use syntect::easy::HighlightLines;
 use syntect::highlighting::{Style, ThemeSet};
 use syntect::parsing::SyntaxSet;
 use syntect::util::LinesWithEndings;
+
+mod colors;
 
 #[derive(Parser, Debug)]
 #[command(version, about, long_about = None)]
@@ -20,38 +23,19 @@ struct Args {
 }
 
 fn main() -> io::Result<()> {
+    let base_path = std::env::var("SYNTAX_EXPORT_PATH").unwrap_or(".".to_string());
     // Parse command-line arguments
-    // let args = Args::parse();
-    let input = "use reqwest::blocking::get;
-use serde_json::Value;
-use std::fs;
+    let args = Args::parse();
+    let input = args.input;
 
-fn example_function() -> anyhow::Result<()> {
-    let url = \"https://api.example.com/data\";
-    let response = get(url)?;
-
-    let json: Value = response.json()?;
-    
-    let data = json[\"data\"]
-        .as_str()
-        .ok_or(anyhow::anyhow!(
-	        \"Failed to extract 'data' field from JSON\"
-	    ))?;
-
-    let file_path = \"output.txt\";
-    fs::write(file_path, data)?;
-
-    println!(\"Data successfully written to {}\", file_path);
-    Ok(())
-}";
-
-    let output = "output.png".to_string();
+    let output = format!("{}/{}", base_path, args.output);
 
     // - `base16-ocean.dark`,`base16-eighties.dark`,`base16-mocha.dark`,`base16-ocean.light`
     // Load syntax definitions and theme
     let ps = SyntaxSet::load_defaults_newlines();
     let ts = ThemeSet::load_defaults();
     let syntax = ps.find_syntax_by_extension("rs").unwrap();
+
     let mut h = HighlightLines::new(syntax, &ts.themes["base16-eighties.dark"]);
 
     // Load a font
@@ -79,7 +63,8 @@ fn example_function() -> anyhow::Result<()> {
         let mut x = 0;
         for (style, text) in ranges {
             let color = style.foreground;
-            let rgba = Rgba([color.r, color.g, color.b, 255]);
+            // let rgba = Rgba([color.r, color.g, color.b, 255]);
+            let rgba = boost_saturation(Rgba([color.r, color.g, color.b, 255]), 2.5);
             for c in text.chars() {
                 // Render the character using rusttype
                 let glyph = font
@@ -102,6 +87,7 @@ fn example_function() -> anyhow::Result<()> {
         y += line_height;
     }
 
+    dbg!(&output);
     // Save the image
     image.save(&output).unwrap();
     println!("Image saved to {}", &output);
