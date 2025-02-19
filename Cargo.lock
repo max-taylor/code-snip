@@ -259,6 +259,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 
 [[package]]
+name = "code-snip"
+version = "0.1.0"
+dependencies = [
+ "clap",
+ "image",
+ "rusttype",
+ "syntect",
+]
+
+[[package]]
 name = "color_quant"
 version = "1.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1040,16 +1050,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "unicode-ident",
-]
-
-[[package]]
-name = "syntax-highlighter-image-export"
-version = "0.1.0"
-dependencies = [
- "clap",
- "image",
- "rusttype",
- "syntect",
 ]
 
 [[package]]

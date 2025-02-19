@@ -1,5 +1,5 @@
 [package]
-name = "syntax-highlighter-image-export"
+name = "code-snip"
 version = "0.1.0"
 edition = "2021"
 
