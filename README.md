@@ -13,8 +13,12 @@ cargo install code-snip
 ## Usage
 
 ```sh
-code-snip --input "fn main() { println!(\"Hello, world!\"); }" --output snippet.rs
+code-snip --input "fn main() {
+    println!(\"Hello world\");
+}" --output snippet.png
 ```
+
+![Example output image](https://github.com/max-taylor/code-snip/tree/main/src/assets/example.png)
 
 ## Arguments
 
