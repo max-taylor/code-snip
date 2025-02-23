@@ -18,7 +18,7 @@ code-snip --input "fn main() {
 }" --output snippet.png
 ```
 
-![Example output image](https://github.com/max-taylor/code-snip/tree/main/src/assets/example.png)
+![Example output image](https://github.com/max-taylor/code-snip/raw/main/src/assets/example.png)
 
 ## Arguments
 
